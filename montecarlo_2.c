@@ -35,18 +35,16 @@ int main(int argc, char **argv)
 	//Create default mutex lock
 	pthread_mutex_init(&mutex, NULL);
 
-	//Create Threads
+	//Create n threads
 	for(int i=0; i<THREADS;i++)
 	{
 		pthread_create(&threads[i], &attr, runner, argv[1]);
-
 	}
 	//Wait for the threads to exit
 
 	for(int i=0; i<THREADS;i++)
 	{
 		pthread_join(threads[i], NULL);
-
 	}
 
 	//Calculate estimate of pi
@@ -59,8 +57,6 @@ int main(int argc, char **argv)
 
 	return 0;
 }
-
-
 
 
 /*
@@ -84,6 +80,9 @@ void *runner(void *param)
 
 		double d = sqrt((x*x)+(y*y));
 
+		/*
+		 * Lock the critical section, update the values, and then unlock.
+		 */
 		pthread_mutex_lock(&mutex);
 		if(d<=1)
 		{
@@ -92,7 +91,6 @@ void *runner(void *param)
 		totalPoints++;
 		pthread_mutex_unlock(&mutex);
 	}
-
 
 		pthread_exit(0);
 

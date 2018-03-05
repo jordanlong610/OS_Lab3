@@ -7,7 +7,6 @@
  *
  */
 
-
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/wait.h>
@@ -27,7 +26,6 @@ int main(int argc, char **argv)
 	pthread_t tid;
 	pthread_attr_t attr;
 
-
 	//Get default attributes
 	pthread_attr_init(&attr);
 	//Create Thread
@@ -44,7 +42,6 @@ int main(int argc, char **argv)
 
 	return 0;
 }
-
 
 
 
@@ -75,9 +72,6 @@ void *runner(void *param)
 		}
 		totalPoints++;
 	}
-
-
 		pthread_exit(0);
-
 }
 
